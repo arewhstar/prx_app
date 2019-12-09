@@ -64,7 +64,7 @@ class Cluster {
 	runLoadBalance(){ 
 		if(this.lb_policy=="RR"){
 
-			if(this.lb_id == this.hosts.length){
+			if(this.lb_id == this.endpoints.length){
 				this.lb_id=0;
 			}
 			else{
