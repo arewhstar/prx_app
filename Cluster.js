@@ -5,17 +5,17 @@ class Cluster {
 		this.connect_timeout=config.connect_timeout;//ms
   		this.per_connection_buffer_limit_bytes=config.per_connection_buffer_limit_bytes;
   		this.lb_policy=config.lb_policy;
-		this.hosts=[];//list
+		this.endpoints=[];//list
 
-		for(var i in config.hosts){
-			var converthost = config.hosts[i].split(":");
+		for(var i in config.endpoints){
+			var converthost = config.endpoints[i].split(":");
 			//UDS
 			if(converthost.length == 1){
-			this.hosts.push({path:converthost[0]});
+			this.endpoints.push({path:converthost[0]});
 			}
 			//NOT UDS
 			else{
-			this.hosts.push({address:converthost[0],port:parseInt(converthost[1],10)});
+			this.endpoints.push({address:converthost[0],port:parseInt(converthost[1],10)});
 			}
 		}
 		
@@ -35,15 +35,15 @@ class Cluster {
   		this.lb_policy=config.lb_policy;
 		this.hosts.splice(0,this.hosts.length);//list
 
-		for(var i in config.hosts){
-			var converthost = config.hosts[i].split(":");
+		for(var i in config.endpoints){
+			var converthost = config.endpoints[i].split(":");
 			//UDS
 			if(converthost.length == 1){
-			this.hosts.push({path:converthost[0]});
+			this.endpoints.push({path:converthost[0]});
 			}
 			//NOT UDS
 			else{
-			this.hosts.push({address:converthost[0],port:parseInt(converthost[1],10)});
+			this.endpoints.push({address:converthost[0],port:parseInt(converthost[1],10)});
 			}
 		}
 		
@@ -84,7 +84,7 @@ class Cluster {
 	}
 
 	getHosts(){
-		return this.hosts;
+		return this.endpoints;
 	}
 	getName(){
 		return this.name;
@@ -93,7 +93,7 @@ class Cluster {
 		
 		var id = this.lb_id;
 		this.runLoadBalance();
-		return this.hosts[id];
+		return this.endpoints[id];
 	
 
 		
