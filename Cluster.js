@@ -83,9 +83,7 @@ class Cluster {
 
 	}
 
-	getHosts(){
-		return this.endpoints;
-	}
+
 	getName(){
 		return this.name;
 	}
