@@ -1,0 +1,50 @@
+{
+
+	"admin":{
+		"log-level":"debug",
+		"control-addr":{
+				"address":"localhost",
+				"port":8888
+		}
+	},
+	"listeners":{
+			"l1":		{  	
+				"name":"l1",
+  				"address":"localhost",
+  				"port":8080,
+  				"filter_chains":0,
+  				"per_connection_buffer_limit_bytes":0,
+  				"metadata":0,
+  				"listener_filters":0,
+  				"socket_options":0,
+				"type":"udp"
+			}
+	},
+	"clusters":{  
+			"c1":{
+				"name":"c1",
+  				"connect_timeout":10,
+  				"per_connection_buffer_limit_bytes":0,
+  				"lb_policy":"FIRST",
+  				"hosts":["0.0.0.0:8001","127.0.0.1:41235"],
+  				"health_checks":0,
+  				"circuit_breakers":0,
+  				"socket_options":0,
+  				"metadata":0,
+  				"filters":0,
+  				"params":0,
+				"type":"ws"
+			}
+	},
+	"routes":{
+			"r1":{
+				"name":"r1",
+				"listener":"l1",
+				"cluster":"c1",
+				"transform":{
+						"uplink":[],
+						"downlink":[]
+				}
+			}
+	}
+}
